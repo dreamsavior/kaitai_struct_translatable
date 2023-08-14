@@ -1,4 +1,5 @@
 # Kaitai Struct: runtime library for JavaScript
+Kaitai Struct's runtime library for JavaScript with added capability to translate strings into the streams.
 
 [![npm@latest](https://img.shields.io/npm/v/kaitai-struct/latest)](https://www.npmjs.com/package/kaitai-struct/v/latest)
 [![npm@next](https://img.shields.io/npm/v/kaitai-struct/next)](https://www.npmjs.com/package/kaitai-struct/v/next)
