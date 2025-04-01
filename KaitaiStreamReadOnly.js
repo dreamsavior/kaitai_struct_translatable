@@ -31,30 +31,10 @@ var KaitaiStream = function(arrayBuffer, byteOffset) {
   }
   this.pos = 0;
   this.alignToByte();
-  console.log("Creating translatable KaitaiStream!");
-  this.regBuffer = []
 };
 
 
 KaitaiStream.prototype = {};
-
-// Trans methods
-Object.defineProperty(KaitaiStream.prototype, "isTranslatable", {
-    get: function myProperty() {
-        return true
-    }
-});
-
-KaitaiStream.prototype.transRegisterBuffer = function(buffer) {
-    console.log("Registering buffer", buffer);
-	if (this.writeMode == false) return;
-	// create a copy from buffer
-	// and store it into regBuffer
-	this.regBuffer.push(Buffer.from(buffer)); 
-	return this.regBuffer;
-}
-// End of Trans methods
-
 
 /**
   Dependency configuration data. Holds urls for (optional) dynamic loading
@@ -624,7 +604,6 @@ KaitaiStream.bytesTerminate = function(data, term, include) {
 };
 
 KaitaiStream.bytesToStr = function(arr, encoding) {
-    console.log("Registering translatable string", arr, encoding);
   if (encoding == null || encoding.toLowerCase() === "ascii") {
     return KaitaiStream.createStringFromArray(arr);
   } else {
@@ -883,13 +862,11 @@ KaitaiStream.prototype.ensureBytesLeft = function(length) {
   @return {Object} Uint8Array to the KaitaiStream backing buffer.
   */
 KaitaiStream.prototype.mapUint8Array = function(length) {
-  console.log("Reading bytes", length);
   length |= 0;
 
   this.ensureBytesLeft(length);
 
   var arr = new Uint8Array(this._buffer, this.byteOffset + this.pos, length);
-  this.transRegisterBuffer(arr);
   this.pos += length;
   return arr;
 };
